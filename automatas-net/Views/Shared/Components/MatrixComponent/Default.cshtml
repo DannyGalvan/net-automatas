@@ -1,0 +1,40 @@
+﻿@model automatas_net.Models.Vectors
+
+<section class="mt-2">
+    @{
+        if (Model.W.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-secondary">
+                    <tr>
+                        <th scope="col">Esta</th>
+                        @{
+                            foreach (var item in Model.Sigma)
+                            {
+                                <th scope="col">@item</th>
+                            }
+                        }
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        foreach (var item in Model.Q)
+                        {
+                            <tr>
+                                <th scope="row">@item</th>
+                                @{
+                                    foreach (var s in Model.Sigma)
+                                    {
+                                        <td>@Model.GetValueForCell(item,s)</td>
+                                    }
+                                }
+                            </tr> 
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</section>

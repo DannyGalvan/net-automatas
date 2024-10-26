@@ -1,0 +1,44 @@
+﻿@model automatas_net.Models.Vectors?
+@{
+    ViewData["Title"] = "Automatas no deterministas";
+}
+
+<form method="post" action="~/Home/Index" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="formFile" class="form-label fw-bold">Cargar Archivo Txt</label>
+        <input class="form-control" type="file" name="file" accept=".txt" id="formFile" required>
+        @Html.ValidationMessage("File", "", new { @class = "text-danger" })
+    </div>
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-secondary">Subir</button>
+    </div>
+</form>
+<h6 class="fw-bold">Contenido del Archivo</h6>
+<div class="border border-secondary border-2 px-4 py-2 file-content overflow-auto">
+    @if (Model != null)
+    {
+        <pre class="text-start">@Model.FileContent</pre>
+    }
+</div>
+<div class="row justify-content-center matrix-content overflow-auto">
+    <section class="col col-md-6">
+        <p class="fw-bold ">Vectores</p>
+        <hr class="border border-2" />
+        @if (Model != null)
+        {
+            <section class="row row-cols-4 mt-2">
+                @await Component.InvokeAsync("VectorComponent", new VectorComponentModel { Data = Model.Q, Title = "Q" })
+                @await Component.InvokeAsync("VectorComponent", new VectorComponentModel { Data = Model.Sigma, Title = "Z" })
+                @await Component.InvokeAsync("VectorComponent", new VectorComponentModel { Data = Model.A, Title = "A" })
+            </section>
+        }
+    </section>
+    <section class="col col-md-6">
+        <p class="fw-bold ">Matriz</p>
+        <hr class="border border-2" />
+        @if (Model != null)
+        {
+            @await Component.InvokeAsync("MatrixComponent", Model)
+        }
+    </section>
+</div>

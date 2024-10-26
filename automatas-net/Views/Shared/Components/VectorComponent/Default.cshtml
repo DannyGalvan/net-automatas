@@ -1,0 +1,18 @@
+﻿@model automatas_net.Models.VectorComponentModel
+
+<article class="d-flex flex-column align-items-center">
+    @{
+        if (Model.Data.Any())
+        {
+            <p class="vector-item bg-secondary fw-bold text-center p-2 m-0 border border-1 text-white">@Model.Title</p>
+        }
+
+        if (Model.Data.Any())
+        {
+            foreach (var item in Model.Data)
+            {
+                <article class="vector-item text-center p-2 border border-1">@item</article>
+            }
+        }
+    }
+</article>
